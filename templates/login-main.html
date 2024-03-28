@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form action="{% url 'login' %}" method="post">
+            <div class="form-group">
+            {% csrf_token %}
+                {% for field in form %}
+
+                    <label class="form-label">{{ field.label }}:</label>
+                    {{ field }}
+                    <small id="{{ field.name }}Help" class="form-text text-muted">{{ field.help_text }}</small>
+
+                {% endfor %}
+            <button type="submit" class="btn btn-primary">Log In</button>
+        </div>
+    </form>
+
+    {% load socialaccount %}
+    <h3>Login with Google</h3>
+    <a href="{% provider_login_url 'google' %}?next=/">Log In</a>
+{% endblock %}
+

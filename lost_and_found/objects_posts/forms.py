@@ -26,7 +26,7 @@ class ObjectForm(forms.ModelForm):
         model = Object
         fields = "__all__"
 
-class LoginForm(AuthenticationForm):
+class LoginForm(InputStyleMixin, AuthenticationForm):
     pass
 
 

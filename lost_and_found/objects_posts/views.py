@@ -68,7 +68,7 @@ def create(request):
 
 class UserLoginView(LoginView):
     authentication_form = LoginForm
-    template_name = "login.html"
+    template_name = "login-main.html"
 
 
 class UserCreateView(CreateView):
