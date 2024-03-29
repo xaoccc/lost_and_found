@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+
+#  postgredb:
+#    image: postgres
+#    container_name: ostgresql_db
+#    ports:
+#      - "5432:5432"
+#    environment:
+#      - POSTGRES_PASSWORD= Твоята парола дето е в джангото
+#      - POSTGRES_USER= Юзъра дето е в джангото
+#      - POSTGRES_DB= имаето на базата дето е в джангото
+#      - PGDATA=/var/lib/postgresql/data/pgdata
+#    volumes:
+#      - ./:/postgresql:/var/lib/postgresql/data
+#    networks:
+#      - backend-network#    restart: on-failure
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    container_name: redis-lost-and-found
+    command: redis-server --bind '0.0.0.0'
+#    networks:
+#      - backend-network
+    restart: on-failure
+
+#volumes:
+#  postgresql:
+#    name: postgresql
+#
+#networks:
+#  backend-network:
+#    name: backend-network
