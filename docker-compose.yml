@@ -21,11 +21,9 @@ services:
     image: redis
     ports:
       - "6379:6379"
-    container_name: redis-lost-and-found
-    command: redis-server --bind '0.0.0.0'
-#    networks:
-#      - backend-network
     restart: on-failure
+    #    networks:
+    #      - backend-network
 
 #volumes:
 #  postgresql:

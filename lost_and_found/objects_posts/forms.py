@@ -33,6 +33,6 @@ class LoginForm(InputStyleMixin, AuthenticationForm):
 class CreateUserForm(InputStyleMixin, UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'password1', 'password2']
+        fields = ['username', 'email', 'password1', 'password2']
 
 

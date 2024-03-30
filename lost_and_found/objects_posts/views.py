@@ -1,12 +1,16 @@
 from django.contrib.auth import logout
+from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView
+from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import CreateView
 
+from lost_and_found import settings
 from lost_and_found.objects_posts.models import Post
 from lost_and_found.objects_posts.forms import PostCreateForm, ObjectForm, PostEditForm, LoginForm, CreateUserForm
 from lost_and_found.utils.mixins import InputStyleMixin
+# from lost_and_found.objects_posts.tasks import send_register_email
 
 
 def index(request):
@@ -71,12 +75,25 @@ class UserLoginView(LoginView):
     template_name = "login-main.html"
 
 
+def send_register_email(request):
+    subject = 'Login Notification',
+    message = 'You have logged in successfully.',
+    email_from = settings.EMAIL_HOST_USER,
+    recipient_list = [User.objects.all().last().email],
+    send_mail( subject, message, email_from, recipient_list )
+
+
 class UserCreateView(CreateView):
     form_class = CreateUserForm
     template_name = 'register.html'
 
     def get_success_url(self):
         return reverse('index')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        send_register_email(self.request)
+        return response
 
 
 
