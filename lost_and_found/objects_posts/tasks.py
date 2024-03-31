@@ -4,7 +4,6 @@ from django.shortcuts import redirect
 
 from lost_and_found import settings
 
-
 @shared_task
 def send_register_email(request):
     subject = 'Login Notification',
