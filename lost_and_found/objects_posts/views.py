@@ -10,7 +10,7 @@ from lost_and_found import settings
 from lost_and_found.objects_posts.models import Post
 from lost_and_found.objects_posts.forms import PostCreateForm, ObjectForm, PostEditForm, LoginForm, CreateUserForm
 from lost_and_found.utils.mixins import InputStyleMixin
-# from lost_and_found.objects_posts.tasks import send_register_email
+
 
 
 def index(request):
@@ -75,11 +75,12 @@ class UserLoginView(LoginView):
     template_name = "login-main.html"
 
 
+
 def send_register_email(request):
-    subject = 'Login Notification',
-    message = 'You have logged in successfully.',
-    email_from = settings.EMAIL_HOST_USER,
-    recipient_list = [User.objects.all().last().email],
+    subject = 'Successful Registration!'
+    message = 'Thank you for joining our app. Enjoy your stay. We hope you find what you are looking for.'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [User.objects.all().last().email]
     send_mail( subject, message, email_from, recipient_list )
 
 
